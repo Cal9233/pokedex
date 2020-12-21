@@ -7,11 +7,11 @@ import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Router history={history}>
       <App />
     </Router>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById("root")
 );
 

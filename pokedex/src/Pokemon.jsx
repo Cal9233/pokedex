@@ -1,9 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Link, CircularProgress, Button } from "@material-ui/core";
+import { Typography, Link, CircularProgress, Button, Grid, Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles"
 import { toFirstCharUppercase } from "./constants";
 import axios from "axios";
 
+const useStyles = makeStyles((theme) => ({
+  pokemonContainer: {
+    paddingTop: "20px",
+    paddingLeft: "500px",
+    paddingRight: "50px",
+  },
+  button: {
+    alignItems: "center",
+  }
+  
+}))
+
+
 const Pokemon = (props) => {
+  const classes = useStyles();
   const { match, history } = props;
   const { params } = match;
   const { pokemonId } = params;
@@ -25,8 +40,11 @@ const Pokemon = (props) => {
     const { name, id, species, height, weight, types, sprites } = pokemon;
     const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
     const { front_default } = sprites;
+    
     return (
       <>
+      <Container>
+      <Grid className={classes.pokemonContainer}>
         <Typography variant="h1">
           {`${id}.`} {toFirstCharUppercase(name)}
           <img src={front_default} />
@@ -45,6 +63,8 @@ const Pokemon = (props) => {
           const { name } = type;
           return <Typography key={name}> {`${name}`}</Typography>;
         })}
+        </Grid>
+        </Container>
       </>
     );
   };
@@ -54,7 +74,7 @@ const Pokemon = (props) => {
       {pokemon !== undefined && pokemon && generatePokemonJSX(pokemon)}
       {pokemon === false && <Typography> Pokemon not found</Typography>}
       {pokemon !== undefined && (
-        <Button variant="contained" onClick={() => history.push("/")}>
+        <Button className={classes.button} variant="contained" onClick={() => history.push("/")}>
           back to pokedex
         </Button>
       )}
