@@ -9,9 +9,17 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "20px",
     paddingLeft: "500px",
     paddingRight: "50px",
+    backgroundColor: "white",
+    borderRadius: "50%",
   },
   button: {
-    alignItems: "center",
+    //display: "flex",
+    //alignItems: "center",
+    //justifyContent: "center",
+    marginRight: "50px",
+  },
+  title: {
+    marginLeft: "20px",
   }
   
 }))
@@ -38,14 +46,14 @@ const Pokemon = (props) => {
 
   const generatePokemonJSX = (pokemon) => {
     const { name, id, species, height, weight, types, sprites } = pokemon;
-    const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+    const fullImageUrl = `https://cdn.traction.one/pokedex/pokemon/${id}.png`;
     const { front_default } = sprites;
     
     return (
       <>
       <Container>
       <Grid className={classes.pokemonContainer}>
-        <Typography variant="h1">
+        <Typography className={classes.title} variant="h1">
           {`${id}.`} {toFirstCharUppercase(name)}
           <img src={front_default} />
         </Typography>
